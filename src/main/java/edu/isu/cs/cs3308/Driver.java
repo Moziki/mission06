@@ -13,6 +13,7 @@ public class Driver {
         HashSet<String> wordBank;
         HashSet<String> userWords;
         LinkedList<String> dict = new LinkedList<>();
+        SpellCheck checker = new SpellCheck();
 
         Scanner doc = null;
         Scanner user = new Scanner(System.in);
@@ -43,9 +44,19 @@ public class Driver {
         String[] u = userInput.split(" ");
         userWords = new HashSet<>();
         for (String s : u) {
-            userWords.add(s);
+            userWords.add(s.toLowerCase());
         }
-        userWords.forEach(x -> System.out.println(x));
+        for (String s : userWords) {
+             dict = (LinkedList<String>)checker.check(s);
+            if (dict.size() == 1) {
+
+            }
+            else for (String st : dict)
+                System.out.println(st);
+        }
+
+        //userWords.removeAll(wordBank);
+        //userWords.forEach(x -> System.out.println(x));
     }
 }
 
