@@ -8,6 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Checks spelling of words and comprises possible fixes
+ *
+ * @Author Dan Walker
+ *
+ */
 public class SpellCheck implements SpellChecker {
     HashSet<String> wordBank;
     public SpellCheck() {
