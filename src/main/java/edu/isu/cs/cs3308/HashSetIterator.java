@@ -19,12 +19,12 @@ public class HashSetIterator<T> implements Iterator{
 
     @Override
     public T next() {
-        T value = s.pop();
-        if (s.isEmpty()){
+        T value = next;
+        if ((s.indexOf(next)) >= (s.size() - 1)){
             next = null;
         }
         else {
-            next = s.getFirst();
+            next = s.get(s.indexOf(next) + 1);
         }
         return value;
     }

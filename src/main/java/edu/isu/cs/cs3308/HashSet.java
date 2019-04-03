@@ -28,7 +28,7 @@ public class HashSet<T> implements Set<T>, Iterable<T>{
 
     @Override
     public void remove(T e) {
-        if (e == null || !this.contains(e)){
+        if (e == null || !(this.contains(e))){
 
         }
         else {

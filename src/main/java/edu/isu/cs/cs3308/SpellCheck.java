@@ -36,33 +36,37 @@ public class SpellCheck implements SpellChecker {
     public List<String> check(String s) {
 
         List<String> correction = new LinkedList<>();
+        HashSet<String> edits = new HashSet<>();
         if (wordBank.contains(s)) {
             correction.add(s);
             return correction;
         } else {
             for (int i = 0; i < s.length(); ++i) {
-                correction.add(s.substring(0, i) + s.substring(i + 1));
+                edits.add(s.substring(0, i) + s.substring(i + 1));
             }
             for (int i = 0; i < s.length() - 1; ++i) {
-                correction.add(s.substring(0, i) + s.substring(i + 1, i + 2) + s.substring(i, i + 1)
+                edits.add(s.substring(0, i) + s.substring(i + 1, i + 2) + s.substring(i, i + 1)
                         + s.substring(i + 2));
             }
             for (int i = 0; i < s.length(); ++i) {
                 for (char c = 'a'; c <= 'z'; ++c) {
-                    correction.add(s.substring(0, i) + String.valueOf(c) + s.substring(i + 1));
+                    edits.add(s.substring(0, i) + String.valueOf(c) + s.substring(i + 1));
                 }
             }
             for (int i = 0; i <= s.length(); ++i) {
                 for (char c = 'a'; c <= 'z'; ++c) {
-                    correction.add(s.substring(0, i) + String.valueOf(c) + s.substring(i));
+                    edits.add(s.substring(0, i) + String.valueOf(c) + s.substring(i));
                 }
             }
-            HashSet<String> edits = new HashSet((LinkedList<String>) correction);
+            //HashSet<String> edits = new HashSet((LinkedList<String>) correction);
             edits.retainAll(wordBank);
-
+            if (edits.list.isEmpty()) {
+                correction.add("No known words associated with that");
+                return correction;
+            }
             for (String ww : edits) {
                 correction.add(ww);
-                System.out.println(ww);
+
             }
 
             return correction;
